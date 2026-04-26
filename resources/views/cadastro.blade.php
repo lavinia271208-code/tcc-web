@@ -6,6 +6,16 @@
     <title>Cadastro - Makeup Studio</title>
 </head>
 <body>
+<header style="display:flex; justify-content:space-between; padding:20px;">
+    <a href="/" style="
+    text-decoration: none; 
+        background-color: #e6b0a2; 
+        color: white; 
+        padding: 10px 25px; 
+        display: inline-block;
+    ">Home</a>
+</header>
+
 
 <div class="make_apppointment_area">
     <div class="container">
@@ -13,7 +23,7 @@
             <div class="col-xl-6 col-lg-8 col-md-10">
                 <div class="appoint_ment_form">
                     <div class="section_title text-center mb-55">
-                        <h3>Criar sua conta</h3>
+                        <h3>Crie sua conta</h3>
                         <p>Preencha os dados abaixo para se cadastrar</p>
                     </div>
                     
@@ -45,7 +55,7 @@
                         </div>
                         
                         <p class="text-center mt-20">
-                            Já tem uma conta? <a href="{{ route('login') }}">Faça login</a>
+                            Já tem uma conta? <a href="{{ route('login') }}" style="text-decoration: none; color: #e6b0a2; font-weight: bold;">Faça login</a>
                         </p>
                     </form>
                 </div>
@@ -61,75 +71,42 @@
     background: #fdf9f6;
 }
 
-@media (max-width: 767px) {
-    .make_apppointment_area {
-        padding-top: 60px;
-        padding-bottom: 30px;
-    }
-}
-
-.make_apppointment_area .appoint_ment_form {
-    margin-bottom: 30px;
-}
-
 .make_apppointment_area .appoint_ment_form form .single_field {
     margin-bottom: 32px;
 }
 
 .make_apppointment_area .appoint_ment_form form .single_field input,
-.make_apppointment_area .appoint_ment_form form .single_field textarea {
+.make_apppointment_area .appoint_ment_form form .single_field select {
     width: 100%;
     border: 0;
-    padding-bottom: 3px;
     border-bottom: 1px solid #c1c1c1;
     padding-left: 10px;
     height: 50px;
     font-family: "Lato", sans-serif;
-    color: #1a1a1a;
+    color: #fff;
     background: transparent;
 }
 
-.make_apppointment_area .appoint_ment_form form .single_field input::placeholder,
-.make_apppointment_area .appoint_ment_form form .single_field textarea::placeholder {
+.make_apppointment_area .appoint_ment_form form .single_field select {
+    appearance: none;
     color: #96989a;
-    font-weight: 400;
-    font-family: "Lato", sans-serif;
 }
 
 .make_apppointment_area .appoint_ment_form form .single_field input:focus,
-.make_apppointment_area .appoint_ment_form form .single_field textarea:focus {
+.make_apppointment_area .appoint_ment_form form .single_field select:focus {
     outline: none;
+    border-bottom: 1px solid #000;
 }
 
-.make_apppointment_area .appoint_ment_form form .single_field textarea {
-    resize: none;
-    margin-top: 41px;
-    padding: 11px 20px 14px 10px;
-}
-
-.make_apppointment_area .appoint_ment_form form .single_field:last-child {
-    margin-bottom: 0;
-}
-
-.make_apppointment_area .appoint_ment_form form button {
-    transition: .3s;
-    cursor: pointer;
-}
-
-.make_apppointment_area .appoint_ment_form form p {
-    margin-top: 17px;
-    margin-bottom: 40px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #464444;
-    line-height: 30px;
+.make_apppointment_area .appoint_ment_form form .single_field input::placeholder {
+    color: #96989a;
 }
 
 /* Estilo do botão */
 .boxed-btn3 {
     display: inline-block;
     padding: 12px 35px;
-    background: #1a1a1a;
+    background: #e5b0a3;
     color: #fff;
     border: none;
     font-family: "Lato", sans-serif;
@@ -137,21 +114,21 @@
     font-size: 16px;
     transition: .3s;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .boxed-btn3:hover {
-    background: #4a4948;
+    background: #fff;
 }
 
 /* Estilo para links */
 .appoint_ment_form a {
-    color: #4a4948;
-    text-decoration: underline;
+    color: white;
     transition: .3s;
 }
 
 .appoint_ment_form a:hover {
-    color: #1a1a1a;
+    color: #fff;
 }
 
 /* Utilitários */
@@ -239,14 +216,14 @@ header nav a {
 
 .main-menu a:hover,
 nav a:hover,
+text-decoration: none,
 header nav a:hover {
     color: #1a1a1a !important;
 }
 
 /* Remove o azul padrão do navegador */
-a:link,
 a:visited {
-    color: #4a4948;
+    color: #1a1a1a;
 }
 
 /* Específico para o link de cadastro no menu */

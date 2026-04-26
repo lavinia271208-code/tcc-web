@@ -24,6 +24,7 @@ return new class extends Migration
         });
     }
 
+    //auth() -> user()
     /**
      * Reverse the migrations.
      *

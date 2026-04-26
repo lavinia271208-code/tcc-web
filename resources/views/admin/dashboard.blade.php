@@ -1,55 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Painel Admin</h1>
+<div class="container" style="padding: 30px;">
+    <h2 style="font-family: 'Playfair Display', serif;">Bem-vinda, Administradora!</h2>
+    <p class="text-muted">Aqui está o resumo do seu estúdio hoje.</p>
+    <hr>
 
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-4">
-            <div class="card p-3">
-                <h4>Agendamentos</h4>
-                <p>{{ $totalAgendamentos }}</p>
+            <div class="card text-white shadow-sm" style="background-color: #e6b0a2; border: none;">
+                <div class="card-body">
+                    <h6>Agendamentos Hoje</h6>
+                    <h3>5</h3>
+                </div>
             </div>
         </div>
-
         <div class="col-md-4">
-            <div class="card p-3">
-                <h4>Serviços</h4>
-                <p>{{ $totalServicos }}</p>
+            <div class="card bg-dark text-white shadow-sm" style="border: none;">
+                <div class="card-body">
+                    <h6>Pendentes de Confirmação</h6>
+                    <h3>2</h3>
+                </div>
             </div>
         </div>
     </div>
 
-    <hr>
-    <h3>Agendamentos Pendentes</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white"><strong>Próximas Clientes</strong></div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr class="text-muted">
+                                <th>Hora</th>
+                                <th>Cliente</th>
+                                <th>Serviço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>14:00</td>
+                                <td>Alice Oliveira</td>
+                                <td>Penteado</td>
+                            </tr>
+                            <tr>
+                                <td>15:30</td>
+                                <td>Beatriz Souza</td>
+                                <td>Maquiagem + Cabelo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Data</th>
-            <th>Status</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($agendamentos as $agendamento)
-            <tr>
-                <td>{{ $agendamento->id }}</td>
-                <td>{{ $agendamento->data_hora }}</td>
-                <td>{{ $agendamento->status }}</td>
-                <td>
-                    @if($agendamento->status == 'pendente')
-                        <a href="{{ url('/admin/aprovar/'.$agendamento->id) }}" class="btn btn-success btn-sm">
-                            Aprovar
-                        </a>
-
-                        <a href="{{ url('/admin/recusar/'.$agendamento->id) }}" class="btn btn-danger btn-sm">
-                            Recusar
-                        </a>
-                    @endif
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white"><strong>Ações Rápidas</strong></div>
+                <div class="card-body d-grid gap-2">
+                    <a href="{{ route('admin.agendamentos') }}" class="btn btn-outline-secondary">
+                        Novo Agendamento
+                    </a>
+                    <a href="{{ route('admin.servicos') }}" class="btn btn-outline-secondary">
+                        Cadastrar Serviço
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

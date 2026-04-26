@@ -18,14 +18,11 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slicknav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-    <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -33,7 +30,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-3 col-lg-3">
                             <div class="logo-img">
-                                <a href="index.html">
+                                <a href="/">
                                     <img src="img/logo.png" alt="">
                                 </a>
                             </div>
@@ -44,17 +41,12 @@
                                     <div class="main-menu">
                                         <nav> <!-- ID'SSS -->
                                             <ul id="navigation">
-                                                <li><a class="active" href="index.html">Home</a></li>
+                                                <li><a class="active" href="/">Home</a></li>
                                                 <li><a href="#servicos">Serviços</a></li>
                                                 <li><a href="{{ route('cadastro') }}">Cadastro</a></li>
-                                                <li><a href="">Login</a></li>
+                                                <li><a href="{{ route('login') }}">Login</a></li>
                                             </ul>
                                         </nav>
-                                    </div>
-                                    <div class="book_room">
-                                        <div class="book_btn">
-                                            <a class="popup-with-form" href="#test-form">Agendar</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +83,6 @@
                             <div class="slider_text">
                                 <h3>makeup studio</h3>
                                 <p>Agende seu horário!</p>
-                                <a href="#" class="boxed-btn3">Agendar</a>
                             </div>
                         </div>
                     </div>
@@ -104,7 +95,6 @@
                             <div class="slider_text">
                                 <h3>makeup studio</h3>
                                 <p>Agende seu horário!</p>
-                                <a href="#" class="boxed-btn3">Agendar</a>
                             </div>
                         </div>
                     </div>
@@ -163,10 +153,10 @@
                          </div>
                          <div class="service_content text-center">
                             <div class="icon">
-                                <i class="flaticon-shave"></i>
+                                <i class="fa-solid fa-gem"></i>
                             </div>
                             <h3>Noiva</h3>
-                            <p>Maquiagem elaborada e delicada. Com tons leves e suaves.</p>
+                            <p>Maquiagem elaborada e delicada. Com tons sutis.</p>
                          </div>
                     </div>
                 </div>
@@ -177,7 +167,7 @@
                          </div>
                          <div class="service_content text-center">
                             <div class="icon">
-                                <i class="flaticon-barber"></i>
+                                <i class="fa-solid fa-crown"></i>
                             </div>
                             <h3>Debutante</h3>
                             <p>Maquiagem elaborada e intensa. Com tons fortes e marcantes.</p>
@@ -191,7 +181,7 @@
                          </div>
                          <div class="service_content text-center">
                             <div class="icon">
-                                <i class="flaticon-null"></i>
+                                <i class="fa-solid fa-spa"></i>
                             </div>
                             <h3>Penteados</h3>
                             <p>Presos e semipresos. Elegantes e modernos.</p>
@@ -209,7 +199,7 @@
             <div class="col-xl-6 col-md-6">
                 <div class="section_title mb-55">
                     <h3>Nossos preços</h3>
-                    <p>Confira os valores dos nossos penteados e maquiagens.</p>
+                    <p>Confira os valores dos nossos penteados e maquiagens</p>
                 </div>
             </div>
         </div>
@@ -323,22 +313,6 @@
         </div>
     </div>
 </div>
-    
-   
-
-   <footer class="footer"> <div class="copy-right_text">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="copy_right text-center"> <p>Copyright &copy; ... </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-    <!-- footer_end  -->
-
 
     <!-- form itself end-->
     <form id="test-form" class="white-popup-block mfp-hide">

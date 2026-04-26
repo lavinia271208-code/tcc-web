@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', [AgendamentoController::class, 'create']);
 
@@ -23,11 +24,33 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/agendamentos', [AdminController::class, 'agendamentos'])->name('admin.agendamentos');
 
 });
-// Rota para mostrar o formulário de cadastro
-Route::get('/cadastro', [AuthController::class, 'showCadastro'])->name('cadastro');
 
-// Rota para processar o cadastro
+// Cadastro
+Route::get('/cadastro', [AuthController::class, 'showCadastro'])->name('cadastro');
 Route::post('/cadastro', [AuthController::class, 'store'])->name('cadastro.store');
 
-// Rota para login
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+// Login
+// mostrar a página
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+// processar o login
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+
+// Rota para o ADM ver a página de agendamentos
+// Rotas para as páginas do administrador
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
+
+Route::get('/admin/agendamentos', function () {
+    return view('admin.agendamentos');
+})->name('admin.agendamentos');
+
+Route::get('/admin/servicos', function () {
+    return view('admin.servicos');
+})->name('admin.servicos');
+
+// No seu web.php
+Route::get('/admin/agendamentos', function () {
+    return view('admin.agendamentos');
+})->name('admin.agendamentos');

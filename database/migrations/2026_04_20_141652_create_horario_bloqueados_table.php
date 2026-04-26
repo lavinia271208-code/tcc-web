@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('horario_bloqueados', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->dateTime('data_hora_inicio');
             $table->dateTime('data_hora_fim');
             $table->string('motivo')->nullable();

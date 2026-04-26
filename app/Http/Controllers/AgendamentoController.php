@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Agendamento;
 use App\Models\Servico;
 
-class AgendamentoController extends Controller
-{
+class AgendamentoController extends Controller{
+    
     // 📅 Tela de agendamento (Exibe o formulário)
     public function create()
     {
