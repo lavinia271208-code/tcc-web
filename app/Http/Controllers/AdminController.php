@@ -6,7 +6,7 @@ use App\Models\Agendamento;
 
 class AdminController extends Controller
 {
-    // 📋 Listar agendamentos
+    //listar agendamentos
     public function index()
 {
     $agendamentos = \App\Models\Agendamento::all();
@@ -19,7 +19,7 @@ class AdminController extends Controller
         'totalServicos'
     ));
 }
-    // ✅ Aprovar
+    //aprovar
     public function aprovar($id)
     {
         $agendamento = Agendamento::findOrFail($id);
@@ -29,7 +29,7 @@ class AdminController extends Controller
         return back();
     }
 
-    // ❌ Recusar
+    //recusar
     public function recusar($id)
     {
         $agendamento = Agendamento::findOrFail($id);

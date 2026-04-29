@@ -8,7 +8,7 @@
             
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4">
-                    <form action="#" method="GET"> {{-- Usando GET por enquanto já que não temos banco --}}
+                    <form action="#" method="GET">
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Nome da Cliente</label>
@@ -40,9 +40,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn" style="background-color: #e6b0a2; color: white; font-weight: bold;">
-                                Salvar na Agenda
-                            </button>
+                            <button type="submit" class="btn" style="background-color: #e6b0a2; color: white; font-weight: bold;">Salvar na Agenda</button>
                         </div>
                     </form>
                 </div>

@@ -39,7 +39,7 @@
                             <div class="menu_wrap d-none d-lg-block">
                                 <div class="menu_wrap_inner d-flex align-items-center justify-content-end">
                                     <div class="main-menu">
-                                        <nav> <!-- ID'SSS -->
+                                        <nav>
                                             <ul id="navigation">
                                                 <li><a class="active" href="/">Home</a></li>
                                                 <li><a href="#servicos">Serviços</a></li>
@@ -384,24 +384,6 @@
     <script src="{{ asset('js/mail-script.js') }}"></script>
 
     <script src="{{ asset('js/main.js') }}"></script>
-    <script>
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            disableDaysOfWeek: [0, 0], // Aqui você pode bloquear domingos, por exemplo
-            // icons: {
-            //  rightIcon: '<span class="fa fa-caret-down"></span>'
-            // }
-        });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
-        });
-        var timepicker = $('#timepicker').timepicker({
-            format: 'HH:MM'
-        });
-    </script>
 </body>
 
 </html>

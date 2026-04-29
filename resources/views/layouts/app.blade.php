@@ -17,8 +17,7 @@
         background-color: #e6b0a2; 
         color: white; 
         padding: 10px 25px; 
-        display: inline-block;
-    ">Home</a>
+        display: inline-block;">Home</a>
 </header>
 
 @yield('content')

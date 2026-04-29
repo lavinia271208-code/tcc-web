@@ -36,7 +36,6 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 // processar o login
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-// Rota para o ADM ver a página de agendamentos
 // Rotas para as páginas do administrador
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
@@ -50,7 +49,7 @@ Route::get('/admin/servicos', function () {
     return view('admin.servicos');
 })->name('admin.servicos');
 
-// No seu web.php
+//adm agend
 Route::get('/admin/agendamentos', function () {
     return view('admin.agendamentos');
 })->name('admin.agendamentos');

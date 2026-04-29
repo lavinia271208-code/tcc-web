@@ -17,20 +17,14 @@
                         @csrf
 
                         <div class="single_field">
-                            <input 
-                                type="email" 
-                                name="email" 
+                            <input type="email" name="email" 
                                 placeholder="Seu e-mail" 
                                 value="{{ old('email') }}"
                                 required>
                         </div>
 
                         <div class="single_field">
-                            <input 
-                                type="password" 
-                                name="password" 
-                                placeholder="Senha" 
-                                required>
+                            <input type="password" name="password" placeholder="Senha" required>
                         </div>
 
                         <div class="single_field text-center">

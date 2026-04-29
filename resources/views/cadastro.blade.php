@@ -12,8 +12,7 @@
         background-color: #e6b0a2; 
         color: white; 
         padding: 10px 25px; 
-        display: inline-block;
-    ">Home</a>
+        display: inline-block;">Home</a>
 </header>
 
 
@@ -102,7 +101,6 @@
     color: #96989a;
 }
 
-/* Estilo do botão */
 .boxed-btn3 {
     display: inline-block;
     padding: 12px 35px;
@@ -121,7 +119,6 @@
     background: #fff;
 }
 
-/* Estilo para links */
 .appoint_ment_form a {
     color: white;
     transition: .3s;
@@ -131,7 +128,6 @@
     color: #fff;
 }
 
-/* Utilitários */
 .text-center {
     text-align: center;
 }
@@ -158,7 +154,6 @@
     font-family: "Lato", sans-serif;
 }
 
-/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -204,7 +199,6 @@
     }
 }
 
-/* Estilo para todos os links do menu */
 .main-menu a,
 nav a,
 header nav a {
@@ -221,18 +215,15 @@ header nav a:hover {
     color: #1a1a1a !important;
 }
 
-/* Remove o azul padrão do navegador */
 a:visited {
     color: #1a1a1a;
 }
 
-/* Específico para o link de cadastro no menu */
 a[href="/cadastro"],
 a[href="#cadastro"],
 a[href="{{ route('cadastro') }}"] {
     color: #4a4948 !important;
 }
 </style>
-
 </body>
 </html>

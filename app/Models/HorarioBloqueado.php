@@ -7,5 +7,4 @@ use Illuminate\Database\Eloquent\Model;
 
 class HorarioBloqueado extends Model
 {
-    use HasFactory;
 }
