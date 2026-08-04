@@ -7,4 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Servico extends Model
 {
+    use HasFactory;
+
+    protected $fillable = [
+        'nome',
+        'descricao',
+        'preco',
+        'duracao_minutos',
+    ];
+
+    protected $casts = [
+        'preco' => 'decimal:2',
+    ];
+
+    public function agendamentos()
+    {
+        return $this->hasMany(Agendamento::class);
+    }
 }

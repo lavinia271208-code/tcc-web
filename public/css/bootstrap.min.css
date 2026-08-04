@@ -338,11 +338,6 @@ progress {
     vertical-align: baseline
 }
 
-[type=number]::-webkit-inner-spin-button,
-[type=number]::-webkit-outer-spin-button {
-    height: auto
-}
-
 [type=search] {
     outline-offset: -2px;
     -webkit-appearance: none
@@ -2073,9 +2068,9 @@ pre code {
 .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25)
+    box-shadow: none;
+    outline: none;
+  border-color: inherit;
 }
 
 .form-control::-webkit-input-placeholder {

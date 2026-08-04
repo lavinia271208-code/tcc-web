@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="single_field text-center">
-                            <a href="{{ route('admin.dashboard') }}" class="boxed-btn3">Entrar</a>
+                            <button type="submit" class="boxed-btn3">Entrar</button>
                         </div>
 
                         <p class="text-center mt-20">Não tem uma conta? <a href="{{ route('cadastro') }}" style="text-decoration: none; color: #e6b0a2; font-weight: bold;">Cadastre-se</a></p>

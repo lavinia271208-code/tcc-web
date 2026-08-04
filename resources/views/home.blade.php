@@ -382,8 +382,10 @@
     <script src="{{ asset('js/jquery.form.js') }}"></script>
     <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('js/mail-script.js') }}"></script>
-
     <script src="{{ asset('js/main.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

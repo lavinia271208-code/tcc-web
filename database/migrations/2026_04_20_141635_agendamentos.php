@@ -11,14 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('agendamentos', function (Blueprint $table) {
             $table->id();
             $table->dateTime('data_hora');
             $table->enum('status', ['pendente', 'confirmado', 'cancelado'])->default('pendente');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('servico_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('servico_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,7 +29,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('agendamentos');
     }

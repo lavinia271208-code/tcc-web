@@ -15,11 +15,11 @@ class AdminMiddleware
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle($request, Closure $next)
-{
-    if (!auth()->check() || auth()->user()->role !== 'admin') {
-        abort(403, 'Acesso negado');
-    }
+    {
+        if (!auth()->check() || !auth()->user()->is_admin) {
+            abort(403, 'Acesso negado');
+        }
 
-    return $next($request);
-}
+        return $next($request);
+    }
 }

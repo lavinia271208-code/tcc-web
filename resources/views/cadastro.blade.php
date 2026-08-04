@@ -82,7 +82,7 @@
     padding-left: 10px;
     height: 50px;
     font-family: "Lato", sans-serif;
-    color: #fff;
+    color: #000;
     background: transparent;
 }
 

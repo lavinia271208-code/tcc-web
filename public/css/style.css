@@ -6159,4 +6159,14 @@ h6 {
   font-size: 12px;
 }
 
+.table-hover tbody tr:hover {
+    background-color: transparent !important;
+}
+
+.btn:focus,
+.btn:active,
+.btn:focus-visible {
+    box-shadow: none !important;
+    outline: none;
+}
 /*# sourceMappingURL=style.css.map */
