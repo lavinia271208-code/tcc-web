@@ -1,0 +1,19 @@
+kind: wasmer.io/App.v0
+name: primeiro_laravel
+owner: lavinia271208
+package: .
+env:
+  APP_ENV: staging
+  APP_DEBUG: "true"
+  APP_KEY: "base64:OpIVTyP+ms9vB+uL22pSaxOndaPrM7ZWVR6kN6IrVu4="
+  DB_CONNECTION: mysql
+  SESSION_DRIVER: database
+  CACHE_STORE: database
+  QUEUE_CONNECTION: sync
+  LOG_CHANNEL: stderr
+capabilities:
+  database:
+    engine: mysql
+locality:
+  regions:
+    - us-losa1
