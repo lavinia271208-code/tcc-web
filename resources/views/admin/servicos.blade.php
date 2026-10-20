@@ -73,82 +73,84 @@
                         @if ($servicos->isEmpty())
                             <p class="text-muted p-4 mb-0">Nenhum serviço cadastrado ainda.</p>
                         @else
-                            <table class="table table-hover align-middle mb-0">
-                                <thead>
-                                    <tr style="background-color: #e6b0a2;">
-                                        <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" class="px-3">Serviço</th>
-                                        <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Preço</th>
-                                        <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Tempo</th>
-                                        <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($servicos as $servico)
-                                        <tr>
-                                            <td class="px-3">{{ $servico->nome }}</td>
-                                            <td>R$ {{ number_format($servico->preco, 2, ',', '.') }}</td>
-                                            <td>{{ $servico->duracao_minutos }} min</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-primary"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editModal{{ $servico->id }}">Editar</button>
-
-                                                <form action="{{ route('admin.servicos.destroy', $servico->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este serviço?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
-                                                </form>
-                                            </td>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead>
+                                        <tr style="background-color: #e6b0a2;">
+                                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" class="px-3">Serviço</th>
+                                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Preço</th>
+                                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Tempo</th>
+                                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Ações</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($servicos as $servico)
+                                            <tr>
+                                                <td class="px-3">{{ $servico->nome }}</td>
+                                                <td>R$ {{ number_format($servico->preco, 2, ',', '.') }}</td>
+                                                <td>{{ $servico->duracao_minutos }} min</td>
+                                                <td>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-primary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editModal{{ $servico->id }}">Editar</button>
 
-                                        <div class="modal fade" id="editModal{{ $servico->id }}" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content border-0">
-                                                    <form action="{{ route('admin.servicos.update', $servico->id) }}" method="POST">
+                                                    <form action="{{ route('admin.servicos.destroy', $servico->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este serviço?');">
                                                         @csrf
-                                                        @method('PUT')
-
-                                                        <div class="modal-header border-0" style="background-color:#e6b0a2; color:#000;">
-                                                            <h5 class="modal-title font-weight-bold">Editar Serviço</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                                                        </div>
-
-                                                        <div class="modal-body p-4">
-                                                            <div class="mb-3">
-                                                                <label class="form-label text-muted">Nome do Serviço</label>
-                                                                <input type="text" name="nome" class="form-control" value="{{ $servico->nome }}" required>
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label class="form-label text-muted">Preço (R$)</label>
-                                                                <input type="text" name="preco" class="form-control" inputmode="decimal" value="{{ $servico->preco }}" required>
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label class="form-label text-muted">Duração (minutos)</label>
-                                                                <input type="text" name="duracao" class="form-control" inputmode="numeric" value="{{ $servico->duracao_minutos }}" required>
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label class="form-label text-muted">Descrição</label>
-                                                                <textarea name="descricao" class="form-control" rows="3" style="resize: none;">{{ $servico->descricao }}</textarea>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal-footer border-0">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                            <button type="submit" class="btn" style="background-color:#e6b0a2; color:#000; font-weight:bold;">Salvar Alterações</button>
-                                                        </div>
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
                                                     </form>
+                                                </td>
+                                            </tr>
+
+                                            <div class="modal fade" id="editModal{{ $servico->id }}" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content border-0">
+                                                        <form action="{{ route('admin.servicos.update', $servico->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+
+                                                            <div class="modal-header border-0" style="background-color:#e6b0a2; color:#000;">
+                                                                <h5 class="modal-title font-weight-bold">Editar Serviço</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                                            </div>
+
+                                                            <div class="modal-body p-4">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label text-muted">Nome do Serviço</label>
+                                                                    <input type="text" name="nome" class="form-control" value="{{ $servico->nome }}" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label text-muted">Preço (R$)</label>
+                                                                    <input type="text" name="preco" class="form-control" inputmode="decimal" value="{{ $servico->preco }}" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label text-muted">Duração (minutos)</label>
+                                                                    <input type="text" name="duracao" class="form-control" inputmode="numeric" value="{{ $servico->duracao_minutos }}" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label text-muted">Descrição</label>
+                                                                    <textarea name="descricao" class="form-control" rows="3" style="resize: none;">{{ $servico->descricao }}</textarea>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal-footer border-0">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn" style="background-color:#e6b0a2; color:#000; font-weight:bold;">Salvar Alterações</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         @endif
-
+                        
                     </div>
                 </div>
 

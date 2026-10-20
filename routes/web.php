@@ -12,18 +12,10 @@ Route::get('/', [AgendamentoController::class, 'create'])->name('home');
 
 Route::post('/agendar', [AgendamentoController::class, 'store'])->name('agendamentos.store');
 
-
-// cadastro
-Route::get('/cadastro', [AuthController::class, 'showCadastro'])->name('cadastro');
-
-Route::post('/cadastro', [AuthController::class, 'store'])->name('cadastro.store');
-
-
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 // área do admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {

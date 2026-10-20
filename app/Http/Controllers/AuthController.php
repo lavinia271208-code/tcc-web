@@ -16,7 +16,7 @@ class AuthController extends Controller
         return view('cadastro');
     }
 
-    //mostra formnde login
+    //mostra form de login
     public function showLogin()
     {
         return view('login');

@@ -11,15 +11,15 @@
                 <p class="text-muted mb-0">Agendamentos do dia de hoje ({{ \Carbon\Carbon::now()->format('d/m/Y') }}).</p>
             </div>
 
-            <div class="d-flex gap-2">
+            <div class="d-flex flex-column flex-sm-row gap-2">
                 <button type="button" 
                         id="btnOpenCalendar"
                         class="btn" 
                         style="background-color:#e6b0a2; color:#000; font-weight:bold;">Ver Calendário</button>
 
                 <a href="{{ route('admin.lista_agendamentos.create') }}"
-                   class="btn"
-                   style="background-color:#e6b0a2; color:#000; font-weight:bold;">+ Novo Agendamento</a>
+                class="btn"
+                style="background-color:#e6b0a2; color:#000; font-weight:bold;">+ Novo Agendamento</a>
             </div>
         </div>
 
@@ -29,107 +29,109 @@
 
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-body p-0">
-                <table class="table table-hover align-middle mb-0">
-                    <thead>
-                        <tr style="background-color: #e6b0a2;">
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" class="px-3">Cliente</th>
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Serviço</th>
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Data</th>
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Horário</th>
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($agendamentos as $agendamento)
-                        <tr>
-                            <td class="px-3">
-                                {{ $agendamento->user->name ?? $agendamento->cliente_nome }}
-                            </td>
-                            <td>
-                                {{ $agendamento->servico->nome }}
-                            </td>
-                            <td>
-                                {{ $agendamento->data_hora->format('d/m/Y') }}
-                            </td>
-                            <td>
-                                {{ $agendamento->data_hora->format('H:i') }}
-                            </td>
-                            <td>
-                                <button type="button"
-                                    class="btn btn-sm btn-outline-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#editModal{{ $agendamento->id }}">
-                                    Editar
-                                </button>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr style="background-color: #e6b0a2;">
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" class="px-3">Cliente</th>
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Serviço</th>
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Data</th>
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Horário</th>
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($agendamentos as $agendamento)
+                            <tr>
+                                <td class="px-3">
+                                    {{ $agendamento->user->name ?? $agendamento->cliente_nome }}
+                                </td>
+                                <td>
+                                    {{ $agendamento->servico->nome }}
+                                </td>
+                                <td>
+                                    {{ $agendamento->data_hora->format('d/m/Y') }}
+                                </td>
+                                <td>
+                                    {{ $agendamento->data_hora->format('H:i') }}
+                                </td>
+                                <td>
+                                    <button type="button"
+                                        class="btn btn-sm btn-outline-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editModal{{ $agendamento->id }}">
+                                        Editar
+                                    </button>
 
-                                <form action="{{ route('admin.lista_agendamentos.destroy', $agendamento->id) }}"
-                                    method="POST"
-                                    class="d-inline"
-                                    onsubmit="return confirm('Tem certeza que deseja excluir este agendamento?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        <!-- modal -->
-                        <div class="modal fade" id="editModal{{ $agendamento->id }}" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content border-0">
-                                    <form action="{{ route('admin.lista_agendamentos.update', $agendamento->id) }}" method="POST">
+                                    <form action="{{ route('admin.lista_agendamentos.destroy', $agendamento->id) }}"
+                                        method="POST"
+                                        class="d-inline"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir este agendamento?');">
                                         @csrf
-                                        @method('PUT')
-
-                                        <div class="modal-header border-0" style="background-color:#e6b0a2; color:#000;">
-                                            <h5 class="modal-title font-weight-bold">Editar Agendamento</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                                        </div>
-
-                                        <div class="modal-body p-4">
-                                            <div class="mb-3">
-                                                <label class="form-label text-muted">Nome do Cliente</label>
-                                                <input type="text" name="cliente_nome" class="form-control"
-                                                       value="{{ $agendamento->user->name ?? $agendamento->cliente_nome }}"
-                                                       autocomplete="off" required>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label text-muted">Serviço</label>
-                                                <select name="servico_id" class="form-select" required>
-                                                    @foreach($servicos as $servico)
-                                                        <option value="{{ $servico->id }}"
-                                                            {{ $agendamento->servico_id == $servico->id ? 'selected' : '' }}>
-                                                            {{ $servico->nome }}
-                                                            - R$ {{ number_format($servico->preco, 2, ',', '.') }}
-                                                            ({{ $servico->duracao_minutos }} min)
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label text-muted">Data e Hora</label>
-                                                <input type="datetime-local" name="data_hora" class="form-control"
-                                                       value="{{ $agendamento->data_hora->format('Y-m-d\TH:i') }}" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer border-0">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn" style="background-color:#e6b0a2; color:#000; font-weight:bold;">Salvar Alterações</button>
-                                        </div>
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
                                     </form>
+                                </td>
+                            </tr>
+
+                            <!-- modal -->
+                            <div class="modal fade" id="editModal{{ $agendamento->id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content border-0">
+                                        <form action="{{ route('admin.lista_agendamentos.update', $agendamento->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+
+                                            <div class="modal-header border-0" style="background-color:#e6b0a2; color:#000;">
+                                                <h5 class="modal-title font-weight-bold">Editar Agendamento</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                            </div>
+
+                                            <div class="modal-body p-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label text-muted">Nome do Cliente</label>
+                                                    <input type="text" name="cliente_nome" class="form-control"
+                                                        value="{{ $agendamento->user->name ?? $agendamento->cliente_nome }}"
+                                                        autocomplete="off" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label text-muted">Serviço</label>
+                                                    <select name="servico_id" class="form-select" required>
+                                                        @foreach($servicos as $servico)
+                                                            <option value="{{ $servico->id }}"
+                                                                {{ $agendamento->servico_id == $servico->id ? 'selected' : '' }}>
+                                                                {{ $servico->nome }}
+                                                                - R$ {{ number_format($servico->preco, 2, ',', '.') }}
+                                                                ({{ $servico->duracao_minutos }} min)
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label text-muted">Data e Hora</label>
+                                                    <input type="datetime-local" name="data_hora" class="form-control"
+                                                        value="{{ $agendamento->data_hora->format('Y-m-d\TH:i') }}" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer border-0">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn" style="background-color:#e6b0a2; color:#000; font-weight:bold;">Salvar Alterações</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-center py-4 text-muted">Nenhum agendamento para o dia de hoje.</td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-muted">Nenhum agendamento para o dia de hoje.</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

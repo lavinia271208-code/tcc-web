@@ -18,6 +18,8 @@ class User extends Authenticatable
         'is_admin',
     ];
 
+    // Campos que nunca aparecem quando o usuário é convertido para JSON/array
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -27,6 +29,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
     ];
+    
+    // Agendamentos feitos por este usuário (1 -> N)
 
     public function agendamentos()
     {

@@ -4,7 +4,7 @@ owner: lavinia271208
 package: .
 env:
   APP_ENV: staging
-  APP_DEBUG: "true"
+  APP_DEBUG: "false"
   APP_KEY: "base64:OpIVTyP+ms9vB+uL22pSaxOndaPrM7ZWVR6kN6IrVu4="
   DB_CONNECTION: mysql
   SESSION_DRIVER: database
@@ -17,4 +17,4 @@ capabilities:
 locality:
   regions:
     - us-losa1
-app_id: da_nYYILtXUoqg8
+app_id: da_RxJIdtAUgxgE

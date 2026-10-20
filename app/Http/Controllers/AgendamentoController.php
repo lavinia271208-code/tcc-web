@@ -21,8 +21,12 @@ class AgendamentoController extends Controller
         return view('admin.lista_agendamentos', compact('agendamentos'));
     }
 
+    // Devolve os agendamentos em JSON no formato do FullCalendar (id, title, start)
+
     public function getEvents()
     {
+        // Só 'servico' é carregado; 'user' será buscado um por um dentro do map (N+1).
+        // with(['servico','user']) resolveria.
         $agendamentos = Agendamento::with('servico')->get();
 
         $events = $agendamentos->map(function ($agendamento) {
@@ -35,7 +39,7 @@ class AgendamentoController extends Controller
 
         return response()->json($events);
     }
-    // tela home
+    // Tela home: formulário de agendamento
     public function create()
     {
         $usuarios = User::orderBy('name')->get();
@@ -46,28 +50,38 @@ class AgendamentoController extends Controller
             'servicos'
         ));
     }
+
+    // Salva o agendamento feito pela cliente na home
+
     public function store(Request $request)
     {
+        // 'exists:tabela,coluna' confirma que o id realmente existe no banco
+
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'servico_id' => 'required|exists:servicos,id',
             'data_hora' => 'required|date',
         ]);
 
+        // Calcula o intervalo [inicio, fim) que o novo agendamento ocuparia
         $inicio = Carbon::parse($request->data_hora);
         $servico = Servico::findOrFail($request->servico_id);
         $fim = (clone $inicio)->addMinutes($servico->duracao_minutos);
 
+        // 1) Existe algum bloqueio que se sobreponha a esse intervalo?
         $bloqueado = HorarioBloqueado::where(function ($query) use ($inicio, $fim) {
             $query->where('data_hora_inicio', '<', $fim)
                   ->where('data_hora_fim', '>', $inicio);
         })->exists();
 
         if ($bloqueado) {
+            // back()->withInput() volta ao formulário mantendo o que foi digitado
             return back()->withInput()->withErrors([
                 'data_hora' => 'O horário selecionado está indisponível ou bloqueado.'
             ]);
         }
+
+        // 2) Existe outro agendamento começando dentro desse intervalo?
         $agendado = Agendamento::where(function ($query) use ($inicio, $fim) {
             $query->where('data_hora', '<', $fim)
                   ->where('data_hora', '>=', $inicio);
@@ -98,7 +112,7 @@ class AgendamentoController extends Controller
         return view('admin.criar_agendamentos', compact('servicos'));
     }
 
-    // salva agendamento
+    // salva agendamento criado pelo admin
     public function storeAdmin(Request $request)
     {
         $request->validate([
@@ -111,6 +125,7 @@ class AgendamentoController extends Controller
         $servico = Servico::findOrFail($request->servico_id);
         $fim = (clone $inicio)->addMinutes($servico->duracao_minutos);
 
+        // Mesma checagem de bloqueio do store()
         $bloqueado = HorarioBloqueado::where(function ($query) use ($inicio, $fim) {
             $query->where('data_hora_inicio', '<', $fim)
                   ->where('data_hora_fim', '>', $inicio);
@@ -121,6 +136,8 @@ class AgendamentoController extends Controller
                 'data_hora' => 'Este horário está bloqueado na agenda!'
             ]);
         }
+
+        // Mesma checagem de conflito do store() (considera só o início dos outros)
         $agendado = Agendamento::where(function ($query) use ($inicio, $fim) {
             $query->where('data_hora', '<', $fim)
                   ->where('data_hora', '>=', $inicio);
@@ -131,8 +148,13 @@ class AgendamentoController extends Controller
                 'data_hora' => 'Já existe outro agendamento neste horário!'
             ]);
         }
+
+        // Procura cliente pelo nome (sem diferenciar maiúsculas/minúsculas)
         $usuario = User::whereRaw('LOWER(name) = ?', [strtolower($request->cliente_nome)])->first();
 
+        
+        // Se não existe, cria um usuário "provisório": e-mail fictício único (o campo é
+        // obrigatório e único) e senha aleatória, já que essa cliente nunca fará login.
         if (! $usuario) {
             $usuario = User::create([
                 'name' => $request->cliente_nome,
@@ -152,6 +174,7 @@ class AgendamentoController extends Controller
             ->with('success', 'Agendamento cadastrado com sucesso!');
     }
 
+    // Exclui o agendamento (soft delete: fica no banco com deleted_at preenchido)
     public function destroy($id)
     {
         $agendamento = Agendamento::findOrFail($id);
@@ -161,6 +184,8 @@ class AgendamentoController extends Controller
             ->route('admin.lista_agendamentos')
             ->with('success', 'Agendamento excluído com sucesso!');
     }
+
+    // Edita/remarca um agendamento (mesma lógica do storeAdmin)
 
     public function update(Request $request, $id)
     {
@@ -187,6 +212,8 @@ class AgendamentoController extends Controller
             ]);
         }
 
+        // Igual aos anteriores, mas ignora o próprio agendamento (id != $id),
+        // senão ele conflitaria consigo mesmo ao salvar sem mudar o horário.
         $conflito = Agendamento::where('id', '!=', $id)
             ->where(function ($query) use ($inicio, $fim) {
                 $query->where('data_hora', '<', $fim)
@@ -198,6 +225,8 @@ class AgendamentoController extends Controller
                 'data_hora' => 'Já existe outro agendamento neste horário!'
             ]);
         }
+        
+        // Busca ou cria a cliente pelo nome, igual ao storeAdmin
 
         $usuario = User::whereRaw('LOWER(name) = ?', [strtolower($request->cliente_nome)])->first();
 

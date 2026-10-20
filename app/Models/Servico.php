@@ -15,10 +15,13 @@ class Servico extends Model
         'preco',
         'duracao_minutos',
     ];
+    // preco sempre com 2 casas decimais
 
     protected $casts = [
         'preco' => 'decimal:2',
     ];
+
+    // Um serviço pode ter vários agendamentos (1 -> N)
 
     public function agendamentos()
     {

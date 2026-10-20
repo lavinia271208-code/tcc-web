@@ -55,88 +55,90 @@
 
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-body p-0">
-                <table class="table table-hover align-middle mb-0">
-                    <thead>
-                        <tr style="background-color: #e6b0a2;">
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" class="px-3">Início</th>
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Fim</th>
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Motivo</th>
-                            <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" width="150">Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($bloqueios as $bloqueio)
-                            <tr>
-                                <td class="px-3">{{ $bloqueio->data_hora_inicio->format('d/m/Y H:i') }}</td>
-                                <td>{{ $bloqueio->data_hora_fim->format('d/m/Y H:i') }}</td>
-                                <td>{{ $bloqueio->motivo ?? 'Sem motivo informado' }}</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <button type="button"
-                                            class="btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editModal{{ $bloqueio->id }}">
-                                            Editar
-                                        </button>
-
-                                        <form action="{{ route('admin.bloqueios.destroy', $bloqueio->id) }}" method="POST" onsubmit="return confirm('Deseja realmente remover este bloqueio?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Desbloquear</button>
-                                        </form>
-                                    </div>
-                                </td>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr style="background-color: #e6b0a2;">
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" class="px-3">Início</th>
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Fim</th>
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;">Motivo</th>
+                                <th style="background-color: #e6b0a2; color: #000; font-weight: bold; border: none;" width="150">Ação</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($bloqueios as $bloqueio)
+                                <tr>
+                                    <td class="px-3">{{ $bloqueio->data_hora_inicio->format('d/m/Y H:i') }}</td>
+                                    <td>{{ $bloqueio->data_hora_fim->format('d/m/Y H:i') }}</td>
+                                    <td>{{ $bloqueio->motivo ?? 'Sem motivo informado' }}</td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <button type="button"
+                                                class="btn btn-sm btn-outline-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editModal{{ $bloqueio->id }}">
+                                                Editar
+                                            </button>
 
-                            <!-- modal  --> 
-                            <div class="modal fade" id="editModal{{ $bloqueio->id }}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content border-0">
-                                        <form action="{{ route('admin.bloqueios.update', $bloqueio->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
+                                            <form action="{{ route('admin.bloqueios.destroy', $bloqueio->id) }}" method="POST" onsubmit="return confirm('Deseja realmente remover este bloqueio?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Desbloquear</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                                            <div class="modal-header border-0" style="background-color:#e6b0a2; color:#000;">
-                                                <h5 class="modal-title font-weight-bold">Editar Bloqueio</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                                            </div>
+                                <!-- modal  --> 
+                                <div class="modal fade" id="editModal{{ $bloqueio->id }}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content border-0">
+                                            <form action="{{ route('admin.bloqueios.update', $bloqueio->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
 
-                                            <div class="modal-body p-4">
-                                                <div class="mb-3">
-                                                    <label class="form-label text-muted">Início do Bloqueio</label>
-                                                    <input type="datetime-local" name="data_hora_inicio" class="form-control"
-                                                        value="{{ $bloqueio->data_hora_inicio->format('Y-m-d\TH:i') }}" required>
+                                                <div class="modal-header border-0" style="background-color:#e6b0a2; color:#000;">
+                                                    <h5 class="modal-title font-weight-bold">Editar Bloqueio</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                                                 </div>
 
-                                                <div class="mb-3">
-                                                    <label class="form-label text-muted">Fim do Bloqueio</label>
-                                                    <input type="datetime-local" name="data_hora_fim" class="form-control"
-                                                        value="{{ $bloqueio->data_hora_fim->format('Y-m-d\TH:i') }}" required>
+                                                <div class="modal-body p-4">
+                                                    <div class="mb-3">
+                                                        <label class="form-label text-muted">Início do Bloqueio</label>
+                                                        <input type="datetime-local" name="data_hora_inicio" class="form-control"
+                                                            value="{{ $bloqueio->data_hora_inicio->format('Y-m-d\TH:i') }}" required>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label text-muted">Fim do Bloqueio</label>
+                                                        <input type="datetime-local" name="data_hora_fim" class="form-control"
+                                                            value="{{ $bloqueio->data_hora_fim->format('Y-m-d\TH:i') }}" required>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label text-muted">Motivo (Opcional)</label>
+                                                        <input type="text" name="motivo" class="form-control"
+                                                            value="{{ $bloqueio->motivo }}"
+                                                            placeholder="Ex: Almoço, Intervalo, Manutenção">
+                                                    </div>
                                                 </div>
 
-                                                <div class="mb-3">
-                                                    <label class="form-label text-muted">Motivo (Opcional)</label>
-                                                    <input type="text" name="motivo" class="form-control"
-                                                        value="{{ $bloqueio->motivo }}"
-                                                        placeholder="Ex: Almoço, Intervalo, Manutenção">
+                                                <div class="modal-footer border-0">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn" style="background-color:#e6b0a2; color:#000; font-weight:bold;">Salvar Alterações</button>
                                                 </div>
-                                            </div>
-
-                                            <div class="modal-footer border-0">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn" style="background-color:#e6b0a2; color:#000; font-weight:bold;">Salvar Alterações</button>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center py-4 text-muted">Nenhum horário bloqueado no momento.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">Nenhum horário bloqueado no momento.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Estúdio de Maquiagem</title>
+    <title>Belle Studio | Agendamento de maquiagem</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -43,7 +43,6 @@
                                             <ul id="navigation">
                                                 <li><a class="active" href="/">Home</a></li>
                                                 <li><a href="#servicos">Serviços</a></li>
-                                                <li><a href="{{ route('cadastro') }}">Cadastro</a></li>
                                                 <li><a href="{{ route('login') }}">Login</a></li>
                                             </ul>
                                         </nav>
@@ -69,8 +68,8 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-8">
                             <div class="slider_text">
-                                <h3>makeup studio</h3>
-                                <p>Agende seu horário!</p>
+                                <h3>Belle Studio</h3>
+                                <p>Agendamento de horários</p>
                             </div>
                         </div>
                     </div>
@@ -81,8 +80,8 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-8">
                             <div class="slider_text">
-                                <h3>makeup studio</h3>
-                                <p>Agende seu horário!</p>
+                                <h3>Belle Studio</h3>
+                                <p>Agendamento de horários</p>
                             </div>
                         </div>
                     </div>
@@ -93,8 +92,8 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-8">
                             <div class="slider_text">
-                                <h3>makeup studio</h3>
-                                <p>Agende seu horário!</p>
+                                <h3>Belle Studio</h3>
+                                <p>Agendamento de horários</p>
                             </div>
                         </div>
                     </div>
